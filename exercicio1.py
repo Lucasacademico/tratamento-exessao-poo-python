@@ -43,17 +43,17 @@ conta2 = Conta("Maria", saldo=357)
 try:
     conta1.depositar(200)
     conta1.sacar(800)  # Deve lançar SaldoInsuficienteError
-except SaldoInsuficienteError as e:
+except (SaldoInsuficienteError, LimiteExcedidoError, ContaDestinoInvalidoError) as e:
     print(e)
 
 try:
-    conta1.transferir(1500, conta2)  # Deve lançar LimiteExcedidoError
-except LimiteExcedidoError as e:
+    conta1.transferir(900, conta2)  # Deve lançar LimiteExcedidoError
+except (SaldoInsuficienteError, LimiteExcedidoError, ContaDestinoInvalidoError) as e:
     print(e)
 
 try:
     conta1.transferir(100, "Conta Inexistente")  # Deve lançar ContaDestinoInvalidaError
-except ContaDestinoInvalidoError as e:
+except (SaldoInsuficienteError, LimiteExcedidoError, ContaDestinoInvalidoError) as e:
     print(e)
 
 try:
